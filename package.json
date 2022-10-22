@@ -1,0 +1,16 @@
+{
+  "name": "05-mongo---tienda",
+  "version": "1.0.0",
+  "description": "Comandos MONGODB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "srart": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^4.11.0"
+  }
+}
