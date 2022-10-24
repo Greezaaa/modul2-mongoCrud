@@ -1,0 +1,83 @@
+h3 {
+  text-align: center;
+  margin: 1rem auto 2rem;
+}
+
+.insertForm {
+  width: min(100% - 20px, 350px);
+  margin-inline: auto;
+  margin-block-end: 2rem;
+}
+.insertForm form {
+  width: 200px;
+  margin: auto;
+}
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+}
+
+.btnAdd {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: #ffffff;
+  opacity: 0.9;
+  transition: all 300ms ease;
+  display: block;
+  margin: 10px auto;
+  background-color: rgb(163, 196, 102);
+}
+
+.btnAdd:hover {
+  opacity: 1;
+}
+
+.store form {
+  width: min(100% - 20px, 800px);
+  margin: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.store form input {
+  flex: 2 1 auto;
+  border: none;
+  box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.btnChange,
+.btnDelete {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #ffffff;
+  transition: all 300ms ease;
+  height: 100%;
+  width: min-content;
+  opacity: 0.6;
+}
+
+.btnChange {
+  background-color: orange;
+}
+
+.btnDelete {
+  background-color: red;
+}
+
+.btnChange:hover,
+.btnDelete:hover {
+  opacity: 1;
+}
+
+.tablesList {
+  list-style-type: none;
+}
+
+.tablesList li {
+  margin: 0 0 1rem;
+}

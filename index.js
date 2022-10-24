@@ -1,6 +1,6 @@
 const express = require("express");
 const mongodb = require("mongodb");
-
+// let ObjectID = require("mongodb").ObjectId;
 let MongoClient = mongodb.MongoClient;
 
 const app = express();
@@ -39,6 +39,8 @@ app.get("/api", (req, res) => {
 
 app.post("/add", (req, res) => {
   let { size, color, material, legs } = req.body;
+
+  // insertamos a la base de datos
   db.collection("mesas").insertOne(
     {
       size: size,
@@ -47,32 +49,35 @@ app.post("/add", (req, res) => {
       legs: legs,
     },
     (error, info) => {
+      // si hay error devolvemos el error
       if (error != undefined) {
         res.send({ error: error });
+        // si no hay errores
       } else {
+        // buscamos todos los datos en base de datos y los devolvemos
         db.collection("mesas")
           .find()
           .toArray(function (error, datos) {
-            if (error != undefined) {
-              res.send({ error: error });
-            } else {
-              if (datos.length > 0) {
-                res.send(datos);
-              } else {
-                res.send({ error: "No hay datos asdas" });
-              }
-            }
+            console.log(datos);
+            res.send(datos);
           });
       }
     }
   );
 });
-
 app.put("/update", (req, res) => {
   console.log(req.body);
-  db.collection("mesas").updateMany(
-    { color: req.body.color },
-    { $set: { color: "granate" } },
+  let { _id, color, size, material, legs } = req.body;
+  db.collection("mesas").update(
+    { _id: mongodb.ObjectId(_id) },
+    {
+      $set: {
+        size: size,
+        color: color,
+        material: material,
+        legs: legs,
+      },
+    },
     (err, info) => {
       console.log(info);
       console.log(err);
@@ -83,45 +88,27 @@ app.put("/update", (req, res) => {
         db.collection("mesas")
           .find()
           .toArray(function (error, datos) {
-            if (error != undefined) {
-              res.send({ error: error });
-            } else {
-              if (datos.length > 0) {
-                res.send(datos);
-              } else {
-                res.send({ error: "No hay datos asdas" });
-              }
-            }
+            console.log(datos);
+            res.send(datos);
           });
       }
     }
   );
 });
 
-app.put("/update", (req, res) => {
+app.delete("/delete", (req, res) => {
   console.log(req.body);
-  db.collection("mesas").updateMany(
-    { color: req.body.color },
-    { $set: { color: "granate" } },
+  db.collection("mesas").deleteOne(
+    { _id: mongodb.ObjectId(req.body._id) },
     (err, info) => {
-      console.log(info);
-      console.log(err);
-
+      // si hay entrada para borrar
       if (err != undefined) {
         res.send({ err: err });
       } else {
         db.collection("mesas")
           .find()
           .toArray(function (error, datos) {
-            if (error != undefined) {
-              res.send({ error: error });
-            } else {
-              if (datos.length > 0) {
-                res.send(datos);
-              } else {
-                res.send({ error: "No hay datos asdas" });
-              }
-            }
+            res.send(datos);
           });
       }
     }
